@@ -1,7 +1,10 @@
-const apiURL = "https://api.datamuse.com/words?rel_syn="
+const apiURL = "https://api.datamuse.com/words"
 
-export const fetchWords = (word) => {
-  return fetch(apiURL + word).then((response) => 
-    response.json()
+export const fetchWords = (word, searchType) => {
+  return fetch(apiURL + searchType + word).then((response) => {
+    if(response.status == 200){
+      return response.json();
+    }
+  }
   )
 }
