@@ -1,24 +1,22 @@
 import { useState } from "react";
+import { useGetWords } from "./hooks/useGetWords";
+
 
 function App() {
 
   const [word, setWord] = useState("");
-  const [wordResults, setWordResults] = useState([]);
-  const apiURL = "https://api.datamuse.com/words?rel_syn=hot"
-
+  const {wordResults, isLoading, getWords} = useGetWords();
 
   const searchWord = (e) => {
     e.preventDefault();
-    fetch(apiURL)
-    .then((response) => response.json())
-    .then(setWordResults);
+    getWords(word);
   }
 
   return (
     <>
       <div className="container p-4  mx-auto flex flex-col items-center pt-8">
         <h1 className="text-blue-900 font-extrabold text-3xl pb-2 ">
-          Word Finding App {word}
+          Word Finding App
         </h1>
         <p className="max-w-3xl text-center ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, ad
@@ -26,6 +24,9 @@ function App() {
           praesentium dignissimos, eaque ab quisquam? Enim, iste distinctio.
           Adipisci, nesciunt reiciendis!
         </p>
+        {word && (
+          <p className="mt-4 text-lg font-medium">Searched word: {word}</p>
+        )}
         <form action="" className="mt-8"  onSubmit={searchWord}>
           <label htmlFor="searchWord" className="mr-4">
             Search Word
@@ -41,12 +42,17 @@ function App() {
             Find word
           </button>
         </form>
-        <div className="flex flex-row gap-4">
-          {wordResults.map((singleWordResult, index) => (
-            <p key={index}>{singleWordResult.word}</p>
-          ))}
-        </div>
+        {isLoading ? (
+          <p>Is loading...</p>
+        ) : (
+          <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
+            {wordResults.map((singleWordResult, index) => (
+              <p key={index} className="bg-gray-200 py-2 px-4 capitalize rounded-md">{singleWordResult.word}</p>
+            ))}
+          </div>
+        )}
 
+  
       </div>
 
     </>
