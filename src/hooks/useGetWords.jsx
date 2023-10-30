@@ -13,6 +13,6 @@ export const useGetWords = () => {
     .then(() => setIsLoading(false))
   };
 
-  return { isLoading, getWords, wordResults }
+  return { isLoading, getWords, wordResults, setWordResults }
 
 }
