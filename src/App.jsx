@@ -14,46 +14,40 @@ function App() {
 
   return (
     <>
-      <div className="container p-4  mx-auto flex flex-col items-center pt-8">
-        <h1 className="text-blue-900 font-extrabold text-3xl pb-2 ">
-          Word Finding App
-        </h1>
-        <p className="max-w-3xl text-center ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, ad
-          corrupti nostrum soluta officia in dolor cumque? Odit impedit
-          praesentium dignissimos, eaque ab quisquam? Enim, iste distinctio.
-          Adipisci, nesciunt reiciendis!
-        </p>
-        {word && (
-          <p className="mt-4 text-lg font-medium">Searched word: {word}</p>
-        )}
-        <form action="" className="mt-8"  onSubmit={searchWord}>
-          <label htmlFor="searchWord" className="mr-4">
-            Search Word
-          </label>
-          <input
-            value={word}
-            onChange={(e) => setWord(e.target.value)}
-            id="searchWord"
-            type="text"
-            className="border-2 border-gray-400 py-2 px-4 rounded-md w-64"
-          />
-          <button className="ml-4  border-2  font-medium py-2 px-4 rounded-md bg-blue-200 border-blue-300 hover:bg-blue-500 hover:border-blue-700 hover:text-white">
-            Find word
-          </button>
-        </form>
-        {isLoading ? (
-          <p>Is loading...</p>
-        ) : (
-          <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
-            {wordResults.map((singleWordResult, index) => (
-              <p key={index} className="bg-gray-200 py-2 px-4 capitalize rounded-md">{singleWordResult.word}</p>
-            ))}
-          </div>
-        )}
+      <div className="bg-gray-700/70 h-[100svh] flex items-center">
+        <div className="container p-4  mx-auto flex flex-col items-center pt-8">
+          <h1 className="text-white font-semibold text-5xl pb-2 ">
+            Word Finding App
+          </h1>
+          <form action="" className="mt-8"  onSubmit={searchWord}>
+            <label htmlFor="searchWord" className="mr-4 text-gray-200 sr-only">
+              Search Word
+            </label>
+            <input
+              value={word}
+              onChange={(e) => setWord(e.target.value)}
+              id="searchWord"
+              type="text"
+              className="py-4 px-4 rounded-md w-64 text-2xl min-w-[25rem] capitalize border-2 border-gray-200"
+            />
+            <button className="ml-4 py-4 px-4 rounded-md text-2xl border-2 border-gray-200  cursor-pointer font-medium text-white hover:bg-white/20">
+              Search
+            </button>
+          </form>
+          {isLoading ? (
+            <p>Is loading...</p>
+          ) : (
+            <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
+              {wordResults.map((singleWordResult, index) => (
+                <p onClick={() => getWords(singleWordResult.word, setWord(singleWordResult.word))} key={index} className="bg-gray-200 py-2 px-4 capitalize rounded-md hover:bg-blue-200 cursor-pointer">{singleWordResult.word}</p>
+              ))}
+            </div>
+          )}
 
-  
+    
+        </div>
       </div>
+
 
     </>
   );
