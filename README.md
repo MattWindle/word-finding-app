@@ -1,8 +1,8 @@
-# React + Vite
+# A simple word searching app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application has significantly facilitated my React learning journey. It seamlessly integrates a 3rd-party API that offers diverse functions for retrieving various word types depending on URL parameters. Leveraging these API endpoints, the application incorporates a user-friendly form that empowers users to search for words based on their input.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technology Used
+- Vite
+- Tailwind CSS
+- Datamuse API (https://www.datamuse.com/api/)
