@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetWords } from "./hooks/useGetWords";
-import { WordLoader } from "./components/wordLoader"
+import { Loader } from "./components/Loader"
 
 function App() {
 
@@ -49,21 +49,10 @@ function App() {
             </div>
 
           </form>
- 
           <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
           {isLoading ? (
             <>
-              <WordLoader width="w-20" />
-              <WordLoader width="w-20" />
-              <WordLoader width="w-12" />
-              <WordLoader width="w-24" />
-              <WordLoader width="w-24" />
-              <WordLoader width="w-24" />
-              <WordLoader width="w-16" />
-              <WordLoader width="w-14" />
-              <WordLoader width="w-24" />
-              <WordLoader width="w-24" />
-              <WordLoader width="w-32" />
+              <Loader />
             </>
 
           ) : (
