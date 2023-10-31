@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetWords } from "./hooks/useGetWords";
-
+import { WordLoader } from "./components/wordLoader"
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
     setWord("")
     setWordResults([])
   }
+
   return (
     <>
       <div className="bg-gray-700/70 h-[100svh] flex items-center">
@@ -48,19 +49,35 @@ function App() {
             </div>
 
           </form>
+ 
+          <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
           {isLoading ? (
-            <p className="text-white pt-8 text-xl">Is loading...</p>
+            <>
+              <WordLoader width="w-20" />
+              <WordLoader width="w-20" />
+              <WordLoader width="w-12" />
+              <WordLoader width="w-24" />
+              <WordLoader width="w-24" />
+              <WordLoader width="w-24" />
+              <WordLoader width="w-16" />
+              <WordLoader width="w-14" />
+              <WordLoader width="w-24" />
+              <WordLoader width="w-24" />
+              <WordLoader width="w-32" />
+            </>
+
           ) : (
-            <div className="flex flex-row gap-4 max-w-[1200px] flex-wrap mt-8">
+            <>
               {wordResults.map((singleWordResult, index) => (
                 <p onClick={() => {
                   getWords(singleWordResult.word, searchType)
                   setWord(singleWordResult.word)
                 }} key={index} className="bg-gray-200 py-2 px-4 capitalize rounded-md hover:bg-blue-200 cursor-pointer">{singleWordResult.word}</p>
               ))}
-            </div>
+            </>
           )}
 
+          </div>
     
         </div>
       </div>
