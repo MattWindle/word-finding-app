@@ -33,19 +33,20 @@ const wordHistory = [
   { type: 'Noun', name: "Fast" },
   { type: 'Noun', name: "Super" },
   { type: 'Related Words', name: "Angry" },
+  
 ]
 
 
   return (
-    <div className="flex flex-row bg-gray-700/70 h-[100svh]">
-      <aside className="p-4 w-64 bg-gray-800">
+    <div className="flex flex-row  bg-gray-700/70 h-[100svh]">
+      <aside className="p-4 bg-gray-800 w-64 fixed top-0 left-0 h-[100svh] overflow-y-auto">
         <h2 className="text-white text-xl font-medium mb-4">History</h2>
-        {wordHistory.map((history) => (
-          <HistoryItem name={history.name} type={history.type} />
+        {wordHistory.map((history, index) => (
+          <HistoryItem key={index} name={history.name} type={history.type} />
         ))}
       </aside>
-      <div className="flex items-center">
-        <div className="container p-4  mx-auto flex flex-col items-center pt-8">
+      <div className="flex items-center justify-center w-full">
+        <div className="container mx-auto flex flex-col items-center pt-8">
           <form action="" className="mt-4"  onSubmit={searchWord}>
             <label htmlFor="searchWord" className="text-white font-semibold text-5xl pb-2 my-4 block text-center">
               Search Word 
