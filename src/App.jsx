@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useGetWords } from "./hooks/useGetWords";
 import { Loader } from "./components/Loader"
 import { Dropdown } from "./components/Dropdown";
+import { HistoryItem } from "./components/HistoryItem";
 
 function App() {
 
   const [word, setWord] = useState("");
   const [searchType, setSearchType] = useState("");
   const {wordResults, isLoading, getWords, setWordResults} = useGetWords();
+  // const [wordHistory, setWordHistory] = useState([]);
 
   const searchWord = (e) => {
     e.preventDefault();
@@ -26,11 +28,23 @@ const wordTypes = [
   { id: 3, value: '?rel_jja=', name: "Nouns" },
   { id: 3, value: '?ml=', name: "Related Words" },
 ]
+const wordHistory = [
+  { type: 'Adjective', name: "Happy" },
+  { type: 'Noun', name: "Fast" },
+  { type: 'Noun', name: "Super" },
+  { type: 'Related Words', name: "Angry" },
+]
 
 
   return (
-    <>
-      <div className="bg-gray-700/70 h-[100svh] flex items-center">
+    <div className="flex flex-row bg-gray-700/70 h-[100svh]">
+      <aside className="p-4 w-64 bg-gray-800">
+        <h2 className="text-white text-xl font-medium mb-4">History</h2>
+        {wordHistory.map((history) => (
+          <HistoryItem name={history.name} type={history.type} />
+        ))}
+      </aside>
+      <div className="flex items-center">
         <div className="container p-4  mx-auto flex flex-col items-center pt-8">
           <form action="" className="mt-4"  onSubmit={searchWord}>
             <label htmlFor="searchWord" className="text-white font-semibold text-5xl pb-2 my-4 block text-center">
@@ -77,7 +91,7 @@ const wordTypes = [
     
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
