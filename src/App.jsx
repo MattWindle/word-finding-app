@@ -7,13 +7,14 @@ import { HistoryItem } from "./components/HistoryItem";
 function App() {
 
   const [word, setWord] = useState("");
-  const [searchType, setSearchType] = useState("");
+  const [searchType, setSearchType] = useState({value: "?rel_syn=", name: "Synonyms"});
+  const [wordHistory, setWordHistory] = useState([]);
   const {wordResults, isLoading, getWords, setWordResults} = useGetWords();
-  // const [wordHistory, setWordHistory] = useState([]);
 
-  const searchWord = (e) => {
+  const submitWord = (e) => {
     e.preventDefault();
-    getWords(word, searchType);
+    getWords(word, searchType.value);
+    setHistory();
   }
 
   const clearSearch = () => {
@@ -21,19 +22,17 @@ function App() {
     setWordResults([])
   }
 
+  const setHistory = () => {
+    const newEntry = {word: word, searchType: searchType.name};
+    setWordHistory([...wordHistory, newEntry]);
+    console.log(wordHistory)
+  }
 
 const wordTypes = [
   { id: 1, value: '?rel_syn=', name: "Synonyms" },
   { id: 2, value: '?rel_jjb=', name: "Adjectives" },
   { id: 3, value: '?rel_jja=', name: "Nouns" },
-  { id: 3, value: '?ml=', name: "Related Words" },
-]
-const wordHistory = [
-  { type: 'Adjective', name: "Happy" },
-  { type: 'Noun', name: "Fast" },
-  { type: 'Noun', name: "Super" },
-  { type: 'Related Words', name: "Angry" },
-  
+  { id: 4, value: '?ml=', name: "Related Words" },
 ]
 
 
@@ -41,21 +40,22 @@ const wordHistory = [
     <div className="flex flex-row  bg-gray-700/70 h-[100svh]">
       <aside className="p-4 bg-gray-800 w-64 fixed top-0 left-0 h-[100svh] overflow-y-auto">
         <h2 className="text-white text-xl font-medium mb-4">History</h2>
+        {wordHistory.length < 1 && (<p className="text-white text-xs">No history found.</p>)}
         {wordHistory.map((history, index) => (
-          <HistoryItem key={index} name={history.name} type={history.type} />
+          <HistoryItem key={index} name={history.word} type={history.searchType} />
         ))}
       </aside>
       <div className="flex items-center justify-center w-full">
         <div className="container mx-auto flex flex-col items-center pt-8">
-          <form action="" className="mt-4"  onSubmit={searchWord}>
-            <label htmlFor="searchWord" className="text-white font-semibold text-5xl pb-2 my-4 block text-center">
+          <form action="" className="mt-4"  onSubmit={submitWord}>
+            <label htmlFor="submitWord" className="text-white font-semibold text-5xl pb-2 my-4 block text-center">
               Search Word 
             </label>
             <div className="flex gap-4"> 
             <input
               value={word}
               onChange={(e) => setWord(e.target.value)}
-              id="searchWord"
+              id="submitWord"
               type="text"
               className="py-2 px-4 rounded-md w-64 min-w-[25rem] capitalize border-2 border-gray-200"
             />

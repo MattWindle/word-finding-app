@@ -51,7 +51,7 @@ export function Dropdown({dropDownItems, onChange}){
             leaveTo="opacity-0 translate-y-2"
           >
               {dropDownItems.map((item) => (
-                <li key={item.id} className="p-2 block bg-white cursor-pointer hover:bg-blue-100" data-value={item.value} onClick={() => {setCurrentSelected(item.name); setShowDropdownList(false); onChange(item.value) }}>{item.name}</li>
+                <li key={item.id} className="p-2 block bg-white cursor-pointer hover:bg-blue-100" data-value={item.value} onClick={() => {setCurrentSelected(item.name); setShowDropdownList(false); onChange({value: item.value, name: item.name}) }}>{item.name}</li>
               ))}
            </Transition>
     </div>
