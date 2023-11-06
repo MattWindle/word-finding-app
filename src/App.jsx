@@ -24,8 +24,13 @@ function App() {
 
   const setHistory = () => {
     const newEntry = {word: word, searchType: searchType.name};
-    setWordHistory([...wordHistory, newEntry]);
-    console.log(wordHistory)
+    setWordHistory((prevWordHistory) => {
+      const newHistory = [...prevWordHistory, newEntry];
+      const wordHistoryJSON = JSON.stringify(newHistory);
+      localStorage.setItem('wordHistory', wordHistoryJSON);
+      return newHistory;
+    });
+  
   }
 
 const wordTypes = [
