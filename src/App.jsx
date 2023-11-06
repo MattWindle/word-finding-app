@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetWords } from "./hooks/useGetWords";
 import { Loader } from "./components/Loader"
 import { Dropdown } from "./components/Dropdown";
@@ -30,8 +30,15 @@ function App() {
       localStorage.setItem('wordHistory', wordHistoryJSON);
       return newHistory;
     });
-  
   }
+
+ const getHistory = () => {
+  const storedWordHistoryJSON = localStorage.getItem('wordHistory');
+  if(storedWordHistoryJSON !== null){
+    const storedWordHistory = JSON.parse(storedWordHistoryJSON);
+    setWordHistory(storedWordHistory);
+  }
+ }
 
 const wordTypes = [
   { id: 1, value: '?rel_syn=', name: "Synonyms" },
@@ -40,6 +47,9 @@ const wordTypes = [
   { id: 4, value: '?ml=', name: "Related Words" },
 ]
 
+useEffect(() => {
+  getHistory();
+})
 
   return (
     <div className="flex flex-row  bg-gray-700/70 h-[100svh]">
