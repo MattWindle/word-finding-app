@@ -49,7 +49,7 @@ const wordTypes = [
 
 useEffect(() => {
   getHistory();
-})
+}, [])
 
   return (
     <div className="flex flex-row  bg-gray-700/70 h-[100svh]">
